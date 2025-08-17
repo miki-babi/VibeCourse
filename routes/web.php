@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/link', function () {
-    Artisan::call('migrate');
+    Artisan::call('migrate:fresh');
     Artisan::call('storage:link');
     // Composer dump-autoload (optional and external)
     return response()->json([

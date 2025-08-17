@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 
 
@@ -9,6 +10,16 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/link', function () {
+    Artisan::call('migrate');
+    Artisan::call('storage:link');
+    // Composer dump-autoload (optional and external)
+    return response()->json([
+        'message' => 'All Laravel caches cleared!',
+    ]);
+});
+
 Route::post('/Abyspulsebot', function () {
     // Process the post request here
     $data = request()->all();
